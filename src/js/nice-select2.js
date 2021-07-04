@@ -1,5 +1,3 @@
-import "../scss/nice-select2.scss";
-
 // utility functions
 function triggerClick(el) {
   var event = document.createEvent("MouseEvents");
@@ -116,21 +114,21 @@ NiceSelect.prototype.extractData = function() {
 
 NiceSelect.prototype.renderDropdown = function() {
   var classes = [
-    "nice-select",
+    "select",
     attr(this.el, "class") || "",
     this.disabled ? "disabled" : "",
     this.multiple ? "has-multiple" : ""
   ];
 
-  let searchHtml = `<div class="nice-select-search-box">
-<input type="text" class="nice-select-search" placeholder="Search..."/>
+  let searchHtml = `<div class="select-search-box">
+<input type="text" class="select-search" placeholder="Search..."/>
 </div>`;
 
   var html = `<div class="${classes.join(" ")}" tabindex="${
     this.disabled ? null : 0
   }">
   <span class="${this.multiple ? "multiple-options" : "current"}"></span>
-  <div class="nice-select-dropdown">
+  <div class="select-dropdown">
   ${this.config.searchable ? searchHtml : ""}
   <ul class="list"></ul>
   </div></div>
@@ -240,7 +238,7 @@ NiceSelect.prototype.bindEvent = function() {
 };
 
 NiceSelect.prototype._bindSearchEvent = function() {
-  var searchBox = this.dropdown.querySelector(".nice-select-search");
+  var searchBox = this.dropdown.querySelector(".select-search");
   if (searchBox)
     searchBox.addEventListener("click", function(e) {
       e.stopPropagation();
@@ -254,7 +252,7 @@ NiceSelect.prototype._onClicked = function(e) {
   this.dropdown.classList.toggle("open");
 
   if (this.dropdown.classList.contains("open")) {
-    var search = this.dropdown.querySelector(".nice-select-search");
+    var search = this.dropdown.querySelector(".select-search");
     if (search) {
       search.value = "";
       search.focus();
