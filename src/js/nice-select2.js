@@ -36,6 +36,7 @@ var defaultOptions = {
   data: null,
   searchable: false
 };
+
 function NiceSelect(element, options) {
   this.el = element;
   this.config = Object.assign({}, defaultOptions, options || {});

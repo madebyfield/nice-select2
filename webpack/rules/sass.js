@@ -24,8 +24,7 @@ const loaders = [
   {
     loader: MiniCssExtractPlugin.loader,
     options: {
-      sourceMap: manifest.IS_DEVELOPMENT,
-      importLoader: 2
+      sourceMap: manifest.IS_DEVELOPMENT
     }
   },
   {
@@ -59,7 +58,7 @@ const loaders = [
 
 const rule = {
   test: /\.scss$/,
-  use: loaders
+  use: [MiniCssExtractPlugin.loader, "css-loader"]
 };
 
 // -----------------

@@ -12,25 +12,27 @@ const plugins = [];
 
 // extract plugin
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
 const extractPlugin = new MiniCssExtractPlugin({
   filename: manifest.outputFiles.css,
   //filename: "[name].css",
-  allChunks: true
+  //allChunks: true
 });
-
 plugins.push(extractPlugin);
 
 // copy plugin
 const path = require("path"),
   CopyWebpackPlugin = require("copy-webpack-plugin");
 
-const copyPlugin = new CopyWebpackPlugin([
+const copyPlugin = new CopyWebpackPlugin(
   {
-    from: manifest.paths.src + "/static/**/*",
-    to: manifest.paths.build
+    patterns: [
+      {
+        from: manifest.paths.src + "/**/*",
+        to: manifest.paths.build
+      }
+    ]
   }
-]);
+);
 
 plugins.push(copyPlugin);
 
@@ -50,29 +52,10 @@ plugins.push(
   }),
 
   new webpack.ProvidePlugin({
-    $: "jquery",
-    jQuery: "jquery",
-    "window.jQuery": "jquery",
-    Popper: ["popper.js", "default"],
     global: "window",
     window: "window"
   }),
   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
 );
-
-// ----------------------------
-// @Merging Development Plugins
-// ----------------------------
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin;
-if (manifest.IS_DEVELOPMENT) {
-  plugins
-    .push
-    // new BundleAnalyzerPlugin()
-    // new webpack.NoEmitOnErrorsPlugin(),
-    // new webpack.NamedModulesPlugin(),
-    // new webpack.HotModuleReplacementPlugin()
-    ();
-}
 
 module.exports = plugins;

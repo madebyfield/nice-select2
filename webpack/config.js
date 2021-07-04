@@ -16,10 +16,7 @@
 const path = require("path"),
   manifest = require("./manifest"),
   rules = require("./rules"),
-  plugins = require("./plugins"),
-  UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin;
+plugins = require("./plugins");
 
 // ------------------
 // @Entry Point Setup
@@ -49,31 +46,6 @@ var optimization = {
   nodeEnv: "production"
 };
 
-if (manifest.IS_PRODUCTION) {
-  optimization.minimizer = [
-    new UglifyJsPlugin({
-      parallel: true,
-      uglifyOptions: {
-        compress: {
-          comparisons: true,
-          conditionals: true,
-          dead_code: true,
-          drop_debugger: true,
-          evaluate: true,
-          if_return: true,
-          join_vars: true,
-          sequences: true,
-          unused: true,
-          warnings: false
-        },
-
-        output: {
-          comments: false
-        }
-      }
-    })
-  ];
-}
 
 // -----------------
 // @Exporting Module

@@ -37,34 +37,14 @@ const loaders = [
       sourceMap : manifest.IS_DEVELOPMENT,
       minimize  : manifest.IS_PRODUCTION,
     },
-  },
+  }
 ];
 
 
-// ---------------------------
-// @Merging Production Loaders
-// ---------------------------
-
-if (manifest.IS_PRODUCTION) {
-  rule = {
-    test: /\.css$/,
-    loader: loaders,
-  };
-}
-
-
-// ----------------------------
-// @Merging Development Loaders
-// ----------------------------
-
-if (manifest.IS_DEVELOPMENT) {
-  rule = {
-    test: /\.css$/,
-    use: [{
-      loader: 'style-loader',
-    }].concat(loaders),
-  };
-}
+rule = {
+  test: /\.css$/,
+  use: [MiniCssExtractPlugin.loader, "css-loader"],
+};
 
 
 // -----------------
